@@ -1,0 +1,7 @@
+<div *ngIf="nodeId" id="container">
+  <cadmus-graph-walker
+    [nodeId]="nodeId"
+    [canPick]="true"
+    (nodePick)="onNodePick($event)"
+  ></cadmus-graph-walker>
+</div>

@@ -1,0 +1,54 @@
+version: "3.7"
+
+# Modified compose version using volumes in a Linux-based host.
+# MongoDB: localhost:27017, host folder: /var/db/mongo
+# MySql: localhost:3306, host folder: /var/db/mysql
+# API: localhost:60380
+# web: localhost:4200
+
+services:
+  # MongoDB
+  cadmus-mongo:
+    image: mongo
+    container_name: cadmus-mongo
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --logpath=/dev/null # --quiet
+    ports:
+      - 27017:27017
+    volumes:
+      - /var/db/mongo:/data/db
+    networks:
+      - cadmus-network
+
+  cadmus-api:
+    image: vedph2020/cadmus-graph-api:0.0.1
+    ports:
+      # https://stackoverflow.com/questions/48669548/why-does-aspnet-core-start-on-port-80-from-within-docker
+      - 5153:80
+    depends_on:
+      - cadmus-index
+    # wait for mongo before starting: https://github.com/vishnubob/wait-for-it
+    command: ["./wait-for-it.sh", "cadmus-mongo:27017", "--", "dotnet", "Cadmus.Graph.Api.dll"]
+    environment:
+      # for Windows use : as separator, for non Windows use __
+      # (see https://github.com/aspnet/Configuration/issues/469)
+      - CONNECTIONSTRINGS__TEMPLATE=Server=cadmus-index;port=3306;Database={0};Uid=root;Pwd=mysql;
+      - DATABASENAME=cadmus-graph
+      - SEED__INDEXDELAY=25
+    networks:
+      - cadmus-network
+
+  cadmus-web:
+    image: vedph2020/cadmus-graph-shell:0.0.1
+    ports:
+      - 4200:80
+    depends_on:
+      - cadmus-api
+    networks:
+      - cadmus-network
+
+networks:
+  cadmus-network:
+    driver: bridge
