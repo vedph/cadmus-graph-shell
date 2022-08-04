@@ -12,6 +12,8 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 ## History
 
+- 2022-08-04: updated packages
+
 ### 0.0.1
 
 - 2022-07-29: initial release.
