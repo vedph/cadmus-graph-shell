@@ -10,9 +10,11 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 1. `npm run build-ui`;
 2. `ng build --configuration=production`;
-3. `docker build . -t vedph2020/cadmus-graph-shell:0.0.1 -t vedph2020/cadmus-graph-shell:latest` (replace with the current version).
+3. `docker build . -t vedph2020/cadmus-graph-shell:0.1.0 -t vedph2020/cadmus-graph-shell:latest` (replace with the current version).
 
 ## History
+
+### 0.1.0
 
 - 2023-02-15: updated Angular to 15:
   - removed Angular flex layout, replaced with CSS and media queries.
