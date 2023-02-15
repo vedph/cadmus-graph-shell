@@ -12,6 +12,9 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 ## History
 
+- 2023-02-15: updated Angular to 15:
+  - removed Angular flex layout, replaced with CSS and media queries.
+  - fix to [issues with d3 version used by ngx graph](https://github.com/swimlane/ngx-graph/issues/487#issuecomment-1419718384) by adding an `overrides` section in `package.json`.
 - 2022-09-17: updated packages.
 - 2022-08-04: updated packages.
 

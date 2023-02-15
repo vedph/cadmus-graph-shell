@@ -15,7 +15,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 
@@ -44,7 +43,6 @@ import { AppComponent } from './app.component';
     MatSelectModule,
     MatTabsModule,
     MatTooltipModule,
-    FlexLayoutModule,
     // vendor
     NgxGraphModule,
     // Cadmus

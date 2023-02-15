@@ -70,8 +70,8 @@
         [isClass]="true"
         (nodeChange)="onClassAdd($event)"
       ></cadmus-graph-node-lookup>
-      <mat-chip-list *ngIf="classes.value?.length">
-        <mat-chip
+      <mat-chip-listbox *ngIf="classes.value?.length">
+        <mat-chip-option
           *ngFor="let node of classes.value"
           [removable]="true"
           (removed)="onClassRemove(node)"
@@ -80,8 +80,8 @@
           <button type="button" matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
-        </mat-chip>
-      </mat-chip-list>
+        </mat-chip-option>
+      </mat-chip-listbox>
     </fieldset>
   </div>
 
