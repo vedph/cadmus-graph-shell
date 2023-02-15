@@ -23,8 +23,7 @@ div#filter-head {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
-  grid-template-areas:
-    "tools graph";
+  grid-template-areas: "tools graph";
   gap: 8px;
 }
 #graph {
@@ -37,6 +36,11 @@ div#filter-head {
   height: 100%;
   max-height: 100%;
   background-color: #fdfdfd;
+}
+#tools #bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 /* lt-md */
 @media only screen and (max-width: 959px) {

@@ -48,6 +48,9 @@ export class LinkedNodeFilterComponent implements OnInit {
     return this._filter;
   }
   public set filter(value: LinkedNodeFilter) {
+    if (this._filter === value) {
+      return;
+    }
     this._filter = value;
     this.updateForm(value);
   }
@@ -198,7 +201,8 @@ export class LinkedNodeFilterComponent implements OnInit {
 
   public reset(): void {
     this.form.reset();
-    this.filterChange.emit(this.getFilter());
+    this._filter = this.getFilter();
+    this.filterChange.emit(this._filter);
   }
 
   public apply(): void {

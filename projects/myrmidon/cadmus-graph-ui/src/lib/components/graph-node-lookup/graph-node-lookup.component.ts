@@ -46,7 +46,7 @@ export class GraphNodeLookupComponent {
   public tag?: string;
 
   /**
-   * Emitted whenever a node is picked up.
+   * Emitted whenever a node is picked.
    */
   @Output()
   public nodeChange: EventEmitter<UriNode | null>;

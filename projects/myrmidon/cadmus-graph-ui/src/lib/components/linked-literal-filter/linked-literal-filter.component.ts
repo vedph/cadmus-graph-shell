@@ -47,6 +47,9 @@ export class LinkedLiteralFilterComponent implements OnInit {
     return this._filter;
   }
   public set filter(value: LinkedLiteralFilter) {
+    if (this._filter === value) {
+      return;
+    }
     this._filter = value;
     this.updateForm(value);
   }
@@ -162,7 +165,8 @@ export class LinkedLiteralFilterComponent implements OnInit {
 
   public reset(): void {
     this.form.reset();
-    this.filterChange.emit(this.getFilter());
+    this._filter = this.getFilter();
+    this.filterChange.emit(this._filter);
   }
 
   public apply(): void {

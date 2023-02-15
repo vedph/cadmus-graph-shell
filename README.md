@@ -6,8 +6,10 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 ## Docker
 
-1. `npm run build-ui`
-2. `ng build`
+🐋 The Docker image is used for demo/diagnostic purposes.
+
+1. `npm run build-ui`;
+2. `ng build --configuration=production`;
 3. `docker build . -t vedph2020/cadmus-graph-shell:0.0.1 -t vedph2020/cadmus-graph-shell:latest` (replace with the current version).
 
 ## History

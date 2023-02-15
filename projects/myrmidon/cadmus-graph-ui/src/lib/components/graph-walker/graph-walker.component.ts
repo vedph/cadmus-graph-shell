@@ -33,6 +33,9 @@ export class GraphWalkerComponent implements OnInit {
     return this._nodeId;
   }
   public set nodeId(value: number) {
+    if (this._nodeId === value) {
+      return;
+    }
     this._nodeId = value;
     this.reset(value);
   }
