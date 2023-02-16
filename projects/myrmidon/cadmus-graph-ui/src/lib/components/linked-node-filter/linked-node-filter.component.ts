@@ -2,13 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { take } from 'rxjs/operators';
+import { GraphNodeLookupService } from '../../services/graph-node-lookup.service';
 
 import {
   GraphService,
   LinkedNodeFilter,
   UriNode,
   NodeSourceType,
-} from '../../graph.service';
+} from '../../services/graph.service';
 
 /**
  * Linked non-literal node filter.
@@ -78,7 +79,11 @@ export class LinkedNodeFilterComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(formBuilder: FormBuilder, private _graphService: GraphService) {
+  constructor(
+    formBuilder: FormBuilder,
+    public lookupService: GraphNodeLookupService,
+    private _graphService: GraphService
+  ) {
     this.otherNodeId = 0;
     this.predicateId = 0;
     this.isObject = false;

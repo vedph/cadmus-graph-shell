@@ -66,10 +66,13 @@
   <div>
     <fieldset>
       <legend>classes</legend>
-      <cadmus-graph-node-lookup
-        [isClass]="true"
-        (nodeChange)="onClassAdd($event)"
-      ></cadmus-graph-node-lookup>
+      <cadmus-ref-lookup
+        label="class"
+        [service]="lookupService"
+        [baseFilter]="{ isClass: true }"
+        (itemChange)="onClassAdd($event)"
+      ></cadmus-ref-lookup>
+
       <mat-chip-listbox *ngIf="classes.value?.length">
         <mat-chip-option
           *ngFor="let node of classes.value"

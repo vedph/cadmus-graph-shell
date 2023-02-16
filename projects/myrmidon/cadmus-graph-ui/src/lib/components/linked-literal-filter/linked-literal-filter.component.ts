@@ -2,12 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { forkJoin, from } from 'rxjs';
+import { GraphNodeLookupService } from '../../services/graph-node-lookup.service';
 
 import {
   GraphService,
   LinkedLiteralFilter,
   UriNode,
-} from '../../graph.service';
+} from '../../services/graph.service';
 
 /**
  * Linked literal filter.
@@ -73,7 +74,11 @@ export class LinkedLiteralFilterComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(formBuilder: FormBuilder, private _graphService: GraphService) {
+  constructor(
+    formBuilder: FormBuilder,
+    public lookupService: GraphNodeLookupService,
+    private _graphService: GraphService
+  ) {
     this._filter = {
       pageNumber: 1,
       pageSize: 10,

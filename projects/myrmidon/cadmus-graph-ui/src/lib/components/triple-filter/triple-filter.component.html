@@ -14,17 +14,20 @@
     <mat-tab label="triple">
       <!-- subject ID -->
       <div>
-        subject
-        <cadmus-graph-node-lookup
-          (nodeChange)="onSubjectNodeChange($event)"
-        ></cadmus-graph-node-lookup>
+        <cadmus-ref-lookup
+          label="subject"
+          [service]="lookupService"
+          (itemChange)="onSubjectNodeChange($event)"
+        ></cadmus-ref-lookup>
       </div>
       <!-- predicate IDs -->
       <div>
-        predicate
-        <cadmus-graph-node-lookup
-          (nodeChange)="onPredicateNodeChange($event)"
-        ></cadmus-graph-node-lookup>
+        <cadmus-ref-lookup
+          label="predicate"
+          [service]="lookupService"
+          [baseFilter]="{ tag: 'property' }"
+          (itemChange)="onPredicateNodeChange($event)"
+        ></cadmus-ref-lookup>
         <mat-checkbox [formControl]="isNotPred">not</mat-checkbox>
         <!-- notPreds -->
         <div *ngIf="isNotPred?.value">
@@ -61,10 +64,11 @@
       </div>
       <!-- object ID -->
       <div>
-        object
-        <cadmus-graph-node-lookup
-          (nodeChange)="onObjectNodeChange($event)"
-        ></cadmus-graph-node-lookup>
+        <cadmus-ref-lookup
+          label="object"
+          [service]="lookupService"
+          (itemChange)="onObjectNodeChange($event)"
+        ></cadmus-ref-lookup>
       </div>
       <!-- sid -->
       <div>

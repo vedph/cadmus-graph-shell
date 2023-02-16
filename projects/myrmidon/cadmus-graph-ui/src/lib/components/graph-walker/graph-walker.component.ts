@@ -10,7 +10,7 @@ import {
   LinkedLiteralFilter,
   LinkedNodeFilter,
   TripleFilter,
-} from '../../graph.service';
+} from '../../services/graph.service';
 
 /**
  * Graph walker component. This starts from a given node, and let users
