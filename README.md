@@ -16,6 +16,8 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 ## History
 
+- 2023-02-16: style improvements.
+
 ### 0.1.0
 
 - 2023-02-15: updated Angular to 15:
