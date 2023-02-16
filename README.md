@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is a demo shell for playing with the Cadmus frontend graph components, not intended for production. The backend used in this demo is at the [Cadmus Graph repository](https://github.com/vedph/cadmus-graph).
 
+- 📖 [graph documentation](https://myrmex.github.io/overview/cadmus/dev/concepts/graph/)
+- 🛠️ [backend repository](https://github.com/vedph/cadmus-graph)
 - 👀 [graph walker video](https://www.youtube.com/watch?v=P0TlqbOi590)
 
 ## Docker
@@ -12,9 +14,11 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 1. `npm run build-ui`;
 2. `ng build --configuration=production`;
-3. `docker build . -t vedph2020/cadmus-graph-shell:0.1.0 -t vedph2020/cadmus-graph-shell:latest` (replace with the current version).
+3. `docker build . -t vedph2020/cadmus-graph-shell:0.1.1 -t vedph2020/cadmus-graph-shell:latest` (replace with the current version).
 
 ## History
+
+### 0.1.1
 
 - 2023-02-16:
   - style improvements.
