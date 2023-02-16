@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is a demo shell for playing with the Cadmus frontend graph components, not intended for production. The backend used in this demo is at the [Cadmus Graph repository](https://github.com/vedph/cadmus-graph).
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/P0TlqbOi590" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+- _the graph walker_
+
 ## Docker
 
 🐋 The Docker image is used for demo/diagnostic purposes.
