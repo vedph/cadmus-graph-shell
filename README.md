@@ -16,7 +16,9 @@ This is a demo shell for playing with the Cadmus frontend graph components, not 
 
 ## History
 
-- 2023-02-16: style improvements.
+- 2023-02-16:
+  - style improvements.
+  - replaced lookup with brick.
 
 ### 0.1.0
 
