@@ -22,7 +22,7 @@ import { EnvServiceProvider, NgToolsModule } from '@myrmidon/ng-tools';
 import { NgMatToolsModule } from '@myrmidon/ng-mat-tools';
 import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
 
-import { CadmusGraphUiModule } from 'projects/myrmidon/cadmus-graph-ui/src/public-api';
+import { CadmusGraphUiExModule } from 'projects/myrmidon/cadmus-graph-ui-ex/src/public-api';
 
 import { AppComponent } from './app.component';
 
@@ -50,8 +50,8 @@ import { AppComponent } from './app.component';
     // Cadmus
     NgToolsModule,
     NgMatToolsModule,
-    CadmusGraphUiModule,
-    CadmusRefsLookupModule
+    CadmusGraphUiExModule,
+    CadmusRefsLookupModule,
   ],
   providers: [EnvServiceProvider],
   bootstrap: [AppComponent],

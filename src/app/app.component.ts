@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EnvService } from '@myrmidon/ng-tools';
-import { GraphService } from 'projects/myrmidon/cadmus-graph-ui/src/public-api';
 import { take } from 'rxjs';
 
 import { Node as GraphNode } from '@swimlane/ngx-graph';
+import { GraphService } from 'projects/myrmidon/cadmus-graph-ui-ex/src/public-api';
 
 @Component({
   selector: 'app-root',

@@ -6,6 +6,9 @@
       "@myrmidon/cadmus-graph-ui": [
         "dist/myrmidon/cadmus-graph-ui/myrmidon-cadmus-graph-ui",
         "dist/myrmidon/cadmus-graph-ui"
+      ],
+      "@myrmidon/cadmus-graph-ui-ex": [
+        "dist/myrmidon/cadmus-graph-ui-ex"
       ]
     },
     "baseUrl": "./",

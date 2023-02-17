@@ -71,4 +71,4 @@ import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
     TripleFilterComponent,
   ],
 })
-export class CadmusGraphUiModule {}
+export class CadmusGraphUiExModule {}

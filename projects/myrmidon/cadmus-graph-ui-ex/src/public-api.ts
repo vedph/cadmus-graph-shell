@@ -13,4 +13,4 @@ export * from './lib/services/graph.service';
 
 export * from './lib/graph-walker';
 
-export * from './lib/cadmus-graph-ui.module';
+export * from './lib/cadmus-graph-ui-ex.module';
