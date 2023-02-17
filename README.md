@@ -44,6 +44,10 @@ To use this library in your Cadmus app:
 
 ## History
 
+- 2023-02-17:
+  - moved graph service to `@myrmidon/cadmus-api`.
+  - renamed filter components tags to avoid clashes.
+
 ### 0.1.1
 
 - 2023-02-16:

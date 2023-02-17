@@ -147,46 +147,46 @@
           <ng-template mat-tab-label>
             N<mat-icon>logout</mat-icon>
           </ng-template>
-          <cadmus-triple-filter
+          <cadmus-walker-triple-filter
             [filter]="nOutFilter"
             (filterChange)="onNOutFilterChange($event)"
-          ></cadmus-triple-filter>
+          ></cadmus-walker-triple-filter>
         </mat-tab>
         <!-- N-ins -->
         <mat-tab *ngIf="nInFilter$ | async as nInFilter">
           <ng-template mat-tab-label> N<mat-icon>login</mat-icon> </ng-template>
-          <cadmus-triple-filter
+          <cadmus-walker-triple-filter
             [filter]="nInFilter"
             (filterChange)="onNInFilterChange($event)"
-          ></cadmus-triple-filter>
+          ></cadmus-walker-triple-filter>
         </mat-tab>
         <!-- P-outs -->
         <mat-tab *ngIf="pOutFilter$ | async as pOutFilter">
           <ng-template mat-tab-label>
             P<mat-icon>logout</mat-icon>
           </ng-template>
-          <cadmus-linked-node-filter
+          <cadmus-walker-linked-node-filter
             [filter]="pOutFilter"
             (filterChange)="onPOutFilterChange($event)"
-          ></cadmus-linked-node-filter>
+          ></cadmus-walker-linked-node-filter>
         </mat-tab>
         <!-- P-ins -->
         <mat-tab *ngIf="pInFilter$ | async as pInFilter">
           <ng-template mat-tab-label> P<mat-icon>login</mat-icon> </ng-template>
-          <cadmus-linked-node-filter
+          <cadmus-walker-linked-node-filter
             [filter]="pInFilter"
             (filterChange)="onPInFilterChange($event)"
-          ></cadmus-linked-node-filter>
+          ></cadmus-walker-linked-node-filter>
         </mat-tab>
         <!-- P-lit -->
         <mat-tab *ngIf="pLitFilter$ | async as pLitFilter">
           <ng-template mat-tab-label>
             P<mat-icon>exit_to_app</mat-icon>
           </ng-template>
-          <cadmus-linked-literal-filter
+          <cadmus-walker-linked-literal-filter
             [filter]="pLitFilter"
             (filterChange)="onPLitFilterChange($event)"
-          ></cadmus-linked-literal-filter>
+          ></cadmus-walker-linked-literal-filter>
         </mat-tab>
       </mat-tab-group>
     </div>

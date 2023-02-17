@@ -8,8 +8,6 @@ export * from './lib/components/linked-node-filter/linked-node-filter.component'
 export * from './lib/components/triple-filter/triple-filter.component';
 
 export * from './lib/pipes/graph-node-label.pipe';
-export * from './lib/services/graph-node-lookup.service';
-export * from './lib/services/graph.service';
 
 export * from './lib/graph-walker';
 

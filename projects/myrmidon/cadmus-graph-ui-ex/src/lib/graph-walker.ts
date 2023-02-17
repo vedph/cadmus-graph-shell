@@ -10,7 +10,7 @@ import {
   TripleGroup,
   UriNode,
   UriTriple,
-} from './services/graph.service';
+} from '@myrmidon/cadmus-api';
 
 // #region Shapes
 // All these shapes will be the data property of a Node/Edge in ngx-graph.

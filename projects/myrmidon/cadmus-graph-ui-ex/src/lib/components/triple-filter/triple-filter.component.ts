@@ -2,19 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { forkJoin, from } from 'rxjs';
-import { GraphNodeLookupService } from '../../services/graph-node-lookup.service';
+
+import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
 import {
   GraphService,
   TripleFilter,
   UriNode,
-} from '../../services/graph.service';
+} from '@myrmidon/cadmus-api';
 
 /**
  * Triples filter.
  */
 @Component({
-  selector: 'cadmus-triple-filter',
+  selector: 'cadmus-walker-triple-filter',
   templateUrl: './triple-filter.component.html',
   styleUrls: ['./triple-filter.component.css'],
 })

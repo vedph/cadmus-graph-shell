@@ -2,19 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { forkJoin, from } from 'rxjs';
-import { GraphNodeLookupService } from '../../services/graph-node-lookup.service';
+
+import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
 import {
   GraphService,
   LinkedLiteralFilter,
   UriNode,
-} from '../../services/graph.service';
+} from '@myrmidon/cadmus-api';
 
 /**
  * Linked literal filter.
  */
 @Component({
-  selector: 'cadmus-linked-literal-filter',
+  selector: 'cadmus-walker-linked-literal-filter',
   templateUrl: './linked-literal-filter.component.html',
   styleUrls: ['./linked-literal-filter.component.css'],
 })

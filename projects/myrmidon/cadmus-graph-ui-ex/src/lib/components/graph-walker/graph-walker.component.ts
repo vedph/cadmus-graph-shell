@@ -10,7 +10,7 @@ import {
   LinkedLiteralFilter,
   LinkedNodeFilter,
   TripleFilter,
-} from '../../services/graph.service';
+} from '@myrmidon/cadmus-api';
 
 /**
  * Graph walker component. This starts from a given node, and let users

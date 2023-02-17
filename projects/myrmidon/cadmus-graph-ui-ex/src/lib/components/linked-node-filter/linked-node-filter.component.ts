@@ -2,20 +2,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { take } from 'rxjs/operators';
-import { GraphNodeLookupService } from '../../services/graph-node-lookup.service';
+
+import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
 import {
   GraphService,
   LinkedNodeFilter,
   UriNode,
   NodeSourceType,
-} from '../../services/graph.service';
+} from '@myrmidon/cadmus-api';
 
 /**
  * Linked non-literal node filter.
  */
 @Component({
-  selector: 'cadmus-linked-node-filter',
+  selector: 'cadmus-walker-linked-node-filter',
   templateUrl: './linked-node-filter.component.html',
   styleUrls: ['./linked-node-filter.component.css'],
 })

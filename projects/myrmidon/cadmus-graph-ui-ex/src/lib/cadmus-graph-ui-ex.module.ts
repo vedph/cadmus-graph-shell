@@ -22,12 +22,16 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgToolsModule } from '@myrmidon/ng-tools';
 import { NgMatToolsModule } from '@myrmidon/ng-mat-tools';
 
+import { CadmusCoreModule } from '@myrmidon/cadmus-core';
+import { CadmusApiModule } from '@myrmidon/cadmus-api';
+import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
+import { CadmusGraphUiModule } from '@myrmidon/cadmus-graph-ui';
+
 import { GraphWalkerComponent } from './components/graph-walker/graph-walker.component';
 import { TripleFilterComponent } from './components/triple-filter/triple-filter.component';
 import { LinkedLiteralFilterComponent } from './components/linked-literal-filter/linked-literal-filter.component';
 import { LinkedNodeFilterComponent } from './components/linked-node-filter/linked-node-filter.component';
 import { GraphNodeLabelPipe } from './pipes/graph-node-label.pipe';
-import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
 
 @NgModule({
   declarations: [
@@ -61,11 +65,15 @@ import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
     // Cadmus
     NgToolsModule,
     NgMatToolsModule,
-    CadmusRefsLookupModule
+    CadmusCoreModule,
+    CadmusApiModule,
+    CadmusRefsLookupModule,
+    CadmusGraphUiModule
   ],
   exports: [
     GraphNodeLabelPipe,
     GraphWalkerComponent,
+    CadmusApiModule,
     LinkedLiteralFilterComponent,
     LinkedNodeFilterComponent,
     TripleFilterComponent,

@@ -3,7 +3,7 @@ import { EnvService } from '@myrmidon/ng-tools';
 import { take } from 'rxjs';
 
 import { Node as GraphNode } from '@swimlane/ngx-graph';
-import { GraphService } from 'projects/myrmidon/cadmus-graph-ui-ex/src/public-api';
+import { GraphService } from '@myrmidon/cadmus-api';
 
 @Component({
   selector: 'app-root',
