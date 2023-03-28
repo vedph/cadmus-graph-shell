@@ -44,6 +44,7 @@ To use this library in your Cadmus app:
 
 ## History
 
+- 2023-03-28: updated Angular and packages.
 - 2023-02-17:
   - moved graph service to `@myrmidon/cadmus-api`.
   - renamed filter components tags to avoid clashes.
