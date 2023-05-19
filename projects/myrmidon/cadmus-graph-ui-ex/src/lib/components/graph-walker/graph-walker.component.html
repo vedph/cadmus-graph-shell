@@ -112,7 +112,8 @@
       <span *ngIf="nodes$ | async as nodes" class="muted"
         >N:{{ nodes.length }} E:{{ (edges$ | async)?.length }}</span
       >
-      <button *ngIf="(selectedNode$ | async) as selectedNode"
+      <button
+        *ngIf="selectedNode$ | async as selectedNode"
         type="button"
         color="primary"
         mat-icon-button
@@ -127,9 +128,13 @@
         type="button"
         color="primary"
         mat-icon-button
-        matTooltip="Pick the selected node"
+        [matTooltip]="
+          canMoveToSource
+            ? 'Pick selected node or (shift) its source'
+            : 'Pick the selected node'
+        "
         [disabled]="!(selectedNode$ | async)"
-        (click)="pickSelectedNode()"
+        (click)="pickSelectedNode($event)"
       >
         <mat-icon>check_circle</mat-icon>
       </button>

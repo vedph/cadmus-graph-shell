@@ -47,10 +47,23 @@ export class GraphWalkerComponent implements OnInit {
   public canPick?: boolean;
 
   /**
+   * True if user can move to the source of a picked node when
+   * shift-clicking it.
+   */
+  @Input()
+  public canMoveToSource?: boolean;
+
+  /**
    * Emitted when a graph node is picked by user.
    */
   @Output()
   public nodePick: EventEmitter<GraphNode>;
+
+  /**
+   * Emitted when the user requests to move to the source of a picked node.
+   */
+  @Output()
+  public moveToSource: EventEmitter<GraphNode>;
 
   // graph
   public nodes$: Observable<GraphNode[]>;
@@ -75,6 +88,7 @@ export class GraphWalkerComponent implements OnInit {
     this._walker = new GraphWalker(graphService);
     this._nodeId = 0;
     this.nodePick = new EventEmitter<GraphNode>();
+    this.moveToSource = new EventEmitter<GraphNode>();
 
     this.nodes$ = this._walker.nodes$;
     this.edges$ = this._walker.edges$;
@@ -142,11 +156,15 @@ export class GraphWalkerComponent implements OnInit {
     this._walker.expandSelectedNode(null, filter);
   }
 
-  public pickSelectedNode(): void {
+  public pickSelectedNode(event: MouseEvent): void {
     const node = this._walker.getSelectedNode();
     if (!node) {
       return;
     }
-    this.nodePick.emit(node);
+    if (this.canMoveToSource && event.shiftKey) {
+      this.moveToSource.emit(node);
+    } else {
+      this.nodePick.emit(node);
+    }
   }
 }

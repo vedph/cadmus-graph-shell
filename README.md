@@ -44,6 +44,9 @@ To use this library in your Cadmus app:
 
 ## History
 
+### 1.0.2
+
+- 2023-05-19: added move to source event.
 - 2023-05-18:
   - updated Angular and packages.
   - added a toggle button in the toolbar to toggle the selected node expansion. This is alternative to double click, which might be difficult in some devices.
