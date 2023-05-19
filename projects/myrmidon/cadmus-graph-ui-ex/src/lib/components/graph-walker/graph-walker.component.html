@@ -112,6 +112,16 @@
       <span *ngIf="nodes$ | async as nodes" class="muted"
         >N:{{ nodes.length }} E:{{ (edges$ | async)?.length }}</span
       >
+      <button *ngIf="(selectedNode$ | async) as selectedNode"
+        type="button"
+        color="primary"
+        mat-icon-button
+        matTooltip="Toggle the selected node"
+        [disabled]="!selectedNode"
+        (click)="onNodeDblClick(selectedNode)"
+      >
+        <mat-icon>unfold_more</mat-icon>
+      </button>
       <button
         *ngIf="canPick"
         type="button"

@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._graphService
       .getNodeByUri('x:guys/francesco_petrarca')
+      // .getNodeByUri('itn:events/83072b67-4019-4722-a967-c74bed325681/alpha-sent')
       .pipe(take(1))
       .subscribe((node) => {
         this.nodeId = node.id;

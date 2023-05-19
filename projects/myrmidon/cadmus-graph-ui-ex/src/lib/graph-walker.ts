@@ -618,10 +618,11 @@ export class GraphWalker {
           // calculate an alias ID from the origin's origin: for N18,
           // its origin being P30N17, this will be N17. This produces an
           // alias P30N17, which being already present will avoid duplicates.
-          const aliasId = `P${group.predicateId}N${this.getNodeNumericId(
-            node.data.originId
-          )}`;
-          if (!nodes.some((n) => n.id === prop.id || n.id === aliasId)) {
+          // const aliasId = `P${group.predicateId}N${this.getNodeNumericId(
+          //   node.data.originId
+          // )}`;
+          // if (!nodes.some((n) => n.id === prop.id || n.id === aliasId)) {
+          if (!nodes.some((n) => n.id === prop.id)) {
             nodes.push(prop);
 
             // edge from origin node to object property

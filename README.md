@@ -44,7 +44,22 @@ To use this library in your Cadmus app:
 
 ## History
 
-- 2023-05-18: updated Angular and packages.
+- 2023-05-18:
+  - updated Angular and packages.
+  - added a toggle button in the toolbar to toggle the selected node expansion. This is alternative to double click, which might be difficult in some devices.
+  - removed `aliasId` check in graph walker expand node (see below).
+
+The `aliasId` check seems to be redundant and harmful. Think of a sample like this:
+
+- N80 alpha-sent:
+  - P7N80 a
+  - P47N80 took place at
+    - N81 Arezzo
+      - P7N81 a
+        - N28 E53 place
+
+Now, when expanding N81, we get P7N81 as outbound, and P47N81 as inbound. This would cause N81 not to be expanded for P7N81.
+
 - 2023-05-11: updated to Angular 16.
 - 2023-03-28: updated Angular and packages.
 - 2023-02-17:
