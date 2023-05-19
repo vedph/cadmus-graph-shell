@@ -30,6 +30,6 @@ export class AppComponent implements OnInit {
   }
 
   public onNodePick(node: GraphNode): void {
-    console.log(node.id);
+    console.log(JSON.stringify(node, null, 2));
   }
 }

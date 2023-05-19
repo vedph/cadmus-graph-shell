@@ -162,7 +162,9 @@ export class GraphWalkerComponent implements OnInit {
       return;
     }
     if (this.canMoveToSource && event.shiftKey) {
-      this.moveToSource.emit(node);
+      if (node.data.sid) {
+        this.moveToSource.emit(node);
+      }
     } else {
       this.nodePick.emit(node);
     }

@@ -405,6 +405,7 @@ export class GraphWalker {
               pageNumber: 1,
               pageSize: this.pageSize,
             },
+            sid: node.sid,
           };
           const n: GraphNode = {
             id: this.buildNodeId(node.id),
@@ -747,7 +748,7 @@ export class GraphWalker {
       value: triple.objectLiteral || '',
       type: triple.literalType,
       language: triple.literalLanguage,
-      number: triple.literalNumber,
+      number: triple.literalNumber
     };
     return {
       id: this.buildLiteralId(triple.id),
