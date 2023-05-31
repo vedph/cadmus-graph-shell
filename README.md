@@ -44,6 +44,8 @@ To use this library in your Cadmus app:
 
 ## History
 
+- 2023-05-31: updated Angular.
+
 ### 1.0.3
 
 - 2023-05-19: fixed missing sid in node and added check to emit move to source only when sid is present.
