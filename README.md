@@ -44,6 +44,9 @@ To use this library in your Cadmus app:
 
 ## History
 
+### 1.1.0
+
+- 2023-10-05: updated packages after removing ELF and minor refactorings in Cadmus API services.
 - 2023-08-07: updated Angular.
 - 2023-06-30: updated Angular.
 - 2023-05-31: updated Angular.

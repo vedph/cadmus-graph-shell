@@ -5,11 +5,9 @@ import { forkJoin, from } from 'rxjs';
 
 import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
-import {
-  GraphService,
-  LinkedLiteralFilter,
-  UriNode,
-} from '@myrmidon/cadmus-api';
+import { GraphService, UriNode } from '@myrmidon/cadmus-api';
+
+import { PagedLinkedLiteralFilter } from '../../graph-walker';
 
 /**
  * Linked literal filter.
@@ -20,7 +18,7 @@ import {
   styleUrls: ['./linked-literal-filter.component.css'],
 })
 export class LinkedLiteralFilterComponent implements OnInit {
-  private _filter: LinkedLiteralFilter;
+  private _filter: PagedLinkedLiteralFilter;
 
   /**
    * True if this component is disabled.
@@ -45,10 +43,10 @@ export class LinkedLiteralFilterComponent implements OnInit {
    * The filter.
    */
   @Input()
-  public get filter(): LinkedLiteralFilter {
+  public get filter(): PagedLinkedLiteralFilter {
     return this._filter;
   }
-  public set filter(value: LinkedLiteralFilter) {
+  public set filter(value: PagedLinkedLiteralFilter) {
     if (this._filter === value) {
       return;
     }
@@ -60,7 +58,7 @@ export class LinkedLiteralFilterComponent implements OnInit {
    * Emitted when filter changes.
    */
   @Output()
-  public filterChange: EventEmitter<LinkedLiteralFilter>;
+  public filterChange: EventEmitter<PagedLinkedLiteralFilter>;
 
   public pageNumber: FormControl<number>;
   public pageSize: FormControl<number>;
@@ -85,7 +83,7 @@ export class LinkedLiteralFilterComponent implements OnInit {
       pageSize: 10,
     };
     this.total = 0;
-    this.filterChange = new EventEmitter<LinkedLiteralFilter>();
+    this.filterChange = new EventEmitter<PagedLinkedLiteralFilter>();
     // form
     this.pageNumber = formBuilder.control(1, { nonNullable: true });
     this.pageSize = formBuilder.control(10, { nonNullable: true });
@@ -113,7 +111,7 @@ export class LinkedLiteralFilterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private updateForm(filter: LinkedLiteralFilter): void {
+  private updateForm(filter: PagedLinkedLiteralFilter): void {
     this.pageNumber.setValue(filter.pageNumber);
     this.pageSize.setValue(filter.pageSize);
     this.litPattern.setValue(filter.literalPattern || null);
@@ -137,7 +135,7 @@ export class LinkedLiteralFilterComponent implements OnInit {
     });
   }
 
-  private getFilter(): LinkedLiteralFilter {
+  private getFilter(): PagedLinkedLiteralFilter {
     return {
       pageNumber: +this.pageNumber.value,
       pageSize: +this.pageSize.value,

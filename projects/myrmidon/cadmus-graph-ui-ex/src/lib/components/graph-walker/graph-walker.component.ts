@@ -4,13 +4,15 @@ import { Observable, Subject, take } from 'rxjs';
 import { Edge, Node as GraphNode } from '@swimlane/ngx-graph';
 import { DialogService } from '@myrmidon/ng-mat-tools';
 
-import { GraphWalker, NodeChildTotals } from '../../graph-walker';
+import { GraphService } from '@myrmidon/cadmus-api';
+
 import {
-  GraphService,
-  LinkedLiteralFilter,
-  LinkedNodeFilter,
-  TripleFilter,
-} from '@myrmidon/cadmus-api';
+  GraphWalker,
+  NodeChildTotals,
+  PagedLinkedLiteralFilter,
+  PagedLinkedNodeFilter,
+  PagedTripleFilter,
+} from '../../graph-walker';
 
 /**
  * Graph walker component. This starts from a given node, and let users
@@ -72,11 +74,11 @@ export class GraphWalkerComponent implements OnInit {
   public error$: Observable<string | null>;
   // selected node
   public selectedNode$: Observable<GraphNode | null>;
-  public pOutFilter$: Observable<LinkedNodeFilter | null>;
-  public pInFilter$: Observable<LinkedNodeFilter | null>;
-  public pLitFilter$: Observable<LinkedLiteralFilter | null>;
-  public nOutFilter$: Observable<TripleFilter | null>;
-  public nInFilter$: Observable<TripleFilter | null>;
+  public pOutFilter$: Observable<PagedLinkedNodeFilter | null>;
+  public pInFilter$: Observable<PagedLinkedNodeFilter | null>;
+  public pLitFilter$: Observable<PagedLinkedLiteralFilter | null>;
+  public nOutFilter$: Observable<PagedTripleFilter | null>;
+  public nInFilter$: Observable<PagedTripleFilter | null>;
   public childTotals$: Observable<NodeChildTotals>;
 
   // ngx-graph actions
@@ -136,23 +138,23 @@ export class GraphWalkerComponent implements OnInit {
     this._walker.toggleNode(node);
   }
 
-  public onPOutFilterChange(filter: LinkedNodeFilter): void {
+  public onPOutFilterChange(filter: PagedLinkedNodeFilter): void {
     this._walker.expandSelectedProperty(filter);
   }
 
-  public onPInFilterChange(filter: LinkedNodeFilter): void {
+  public onPInFilterChange(filter: PagedLinkedNodeFilter): void {
     this._walker.expandSelectedProperty(null, filter);
   }
 
-  public onPLitFilterChange(filter: LinkedLiteralFilter): void {
+  public onPLitFilterChange(filter: PagedLinkedLiteralFilter): void {
     this._walker.expandSelectedProperty(null, null, filter);
   }
 
-  public onNOutFilterChange(filter: TripleFilter): void {
+  public onNOutFilterChange(filter: PagedTripleFilter): void {
     this._walker.expandSelectedNode(filter);
   }
 
-  public onNInFilterChange(filter: TripleFilter): void {
+  public onNInFilterChange(filter: PagedTripleFilter): void {
     this._walker.expandSelectedNode(null, filter);
   }
 

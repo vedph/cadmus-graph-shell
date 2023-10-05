@@ -1,6 +1,8 @@
-import { Edge, Node as GraphNode } from '@swimlane/ngx-graph';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { Edge, Node as GraphNode } from '@swimlane/ngx-graph';
+
 import {
   GraphService,
   LinkedLiteralFilter,
@@ -11,6 +13,21 @@ import {
   UriNode,
   UriTriple,
 } from '@myrmidon/cadmus-api';
+
+export interface PagedTripleFilter extends TripleFilter {
+  pageNumber: number;
+  pageSize: number;
+}
+
+export interface PagedLinkedLiteralFilter extends LinkedLiteralFilter {
+  pageNumber: number;
+  pageSize: number;
+}
+
+export interface PagedLinkedNodeFilter extends LinkedNodeFilter {
+  pageNumber: number;
+  pageSize: number;
+}
 
 // #region Shapes
 // All these shapes will be the data property of a Node/Edge in ngx-graph.
@@ -44,8 +61,8 @@ export interface WalkerNodeData extends WalkerWidgetData {
   isClass?: boolean;
   sid?: string;
   tag?: string;
-  outFilter: TripleFilter;
-  inFilter: TripleFilter;
+  outFilter: PagedTripleFilter;
+  inFilter: PagedTripleFilter;
   outTotal?: number;
   inTotal?: number;
 }
@@ -56,9 +73,9 @@ export interface WalkerNodeData extends WalkerWidgetData {
  */
 export interface WalkerPropData extends WalkerWidgetData {
   uri: string;
-  outFilter: LinkedNodeFilter;
-  inFilter: LinkedNodeFilter;
-  litFilter: LinkedLiteralFilter;
+  outFilter: PagedLinkedNodeFilter;
+  inFilter: PagedLinkedNodeFilter;
+  litFilter: PagedLinkedLiteralFilter;
   outTotal?: number;
   inTotal?: number;
   litTotal?: number;
@@ -101,11 +118,11 @@ export class GraphWalker {
   private _rootNode?: GraphNode;
 
   private readonly _selectedNode$: BehaviorSubject<GraphNode | null>;
-  private readonly _pOutFilter$: BehaviorSubject<LinkedNodeFilter | null>;
-  private readonly _pInFilter$: BehaviorSubject<LinkedNodeFilter | null>;
-  private readonly _pLitFilter$: BehaviorSubject<LinkedLiteralFilter | null>;
-  private readonly _nOutFilter$: BehaviorSubject<TripleFilter | null>;
-  private readonly _nInFilter$: BehaviorSubject<TripleFilter | null>;
+  private readonly _pOutFilter$: BehaviorSubject<PagedLinkedNodeFilter | null>;
+  private readonly _pInFilter$: BehaviorSubject<PagedLinkedNodeFilter | null>;
+  private readonly _pLitFilter$: BehaviorSubject<PagedLinkedLiteralFilter | null>;
+  private readonly _nOutFilter$: BehaviorSubject<PagedTripleFilter | null>;
+  private readonly _nInFilter$: BehaviorSubject<PagedTripleFilter | null>;
   private readonly _childTotals$: BehaviorSubject<NodeChildTotals>;
 
   /**
@@ -158,31 +175,31 @@ export class GraphWalker {
   /**
    * The outbound linked nodes filter for the selected P node.
    */
-  public get pOutFilter$(): Observable<LinkedNodeFilter | null> {
+  public get pOutFilter$(): Observable<PagedLinkedNodeFilter | null> {
     return this._pOutFilter$.asObservable();
   }
   /**
    * The inbound linked nodes filter for the selected P node.
    */
-  public get pInFilter$(): Observable<LinkedNodeFilter | null> {
+  public get pInFilter$(): Observable<PagedLinkedNodeFilter | null> {
     return this._pInFilter$.asObservable();
   }
   /**
    * The literal linked nodes filter for the selected P node.
    */
-  public get pLitFilter$(): Observable<LinkedLiteralFilter | null> {
+  public get pLitFilter$(): Observable<PagedLinkedLiteralFilter | null> {
     return this._pLitFilter$.asObservable();
   }
   /**
    * The outbound triples filter for the selected N node.
    */
-  public get nOutFilter$(): Observable<TripleFilter | null> {
+  public get nOutFilter$(): Observable<PagedTripleFilter | null> {
     return this._nOutFilter$.asObservable();
   }
   /**
    * The inbound triples filter for the selected N node.
    */
-  public get nInFilter$(): Observable<TripleFilter | null> {
+  public get nInFilter$(): Observable<PagedTripleFilter | null> {
     return this._nInFilter$.asObservable();
   }
   /**
@@ -198,11 +215,13 @@ export class GraphWalker {
     this._loading$ = new BehaviorSubject<boolean>(false);
     this._error$ = new BehaviorSubject<string | null>(null);
     this._selectedNode$ = new BehaviorSubject<GraphNode | null>(null);
-    this._pOutFilter$ = new BehaviorSubject<LinkedNodeFilter | null>(null);
-    this._pInFilter$ = new BehaviorSubject<LinkedNodeFilter | null>(null);
-    this._pLitFilter$ = new BehaviorSubject<LinkedLiteralFilter | null>(null);
-    this._nOutFilter$ = new BehaviorSubject<TripleFilter | null>(null);
-    this._nInFilter$ = new BehaviorSubject<TripleFilter | null>(null);
+    this._pOutFilter$ = new BehaviorSubject<PagedLinkedNodeFilter | null>(null);
+    this._pInFilter$ = new BehaviorSubject<PagedLinkedNodeFilter | null>(null);
+    this._pLitFilter$ = new BehaviorSubject<PagedLinkedLiteralFilter | null>(
+      null
+    );
+    this._nOutFilter$ = new BehaviorSubject<PagedTripleFilter | null>(null);
+    this._nInFilter$ = new BehaviorSubject<PagedTripleFilter | null>(null);
     this._childTotals$ = new BehaviorSubject<NodeChildTotals>({
       nOut: 0,
       nIn: 0,
@@ -555,13 +574,13 @@ export class GraphWalker {
    */
   public expandNode(
     node: GraphNode,
-    outFilter?: Partial<TripleFilter> | null,
-    inFilter?: Partial<TripleFilter> | null
+    outFilter?: Partial<PagedTripleFilter> | null,
+    inFilter?: Partial<PagedTripleFilter> | null
   ): void {
     // prepare filters
     const nid = this.getNodeNumericId(node.id);
     // outbound: node=S
-    const outf: TripleFilter = outFilter
+    const outf: PagedTripleFilter = outFilter
       ? Object.assign(node.data.outFilter, outFilter, {
           subjectId: nid,
         })
@@ -571,7 +590,7 @@ export class GraphWalker {
           subjectId: nid,
         };
     // inbound: node=O
-    const inf: TripleFilter = inFilter
+    const inf: PagedTripleFilter = inFilter
       ? Object.assign(node.data.inFilter, inFilter, {
           objectId: nid,
         })
@@ -587,8 +606,16 @@ export class GraphWalker {
     const edges = [...this._edges$.value];
 
     forkJoin({
-      outs: this._graphService.getTripleGroups(outf),
-      ins: this._graphService.getTripleGroups(inf),
+      outs: this._graphService.getTripleGroups(
+        outf.pageNumber,
+        outf.pageSize,
+        outf
+      ),
+      ins: this._graphService.getTripleGroups(
+        inf.pageNumber,
+        inf.pageSize,
+        inf
+      ),
     }).subscribe({
       next: (result) => {
         node.data.expanded = true;
@@ -692,8 +719,8 @@ export class GraphWalker {
    * @param inFilter The properties to update for the input filter.
    */
   public expandSelectedNode(
-    outFilter?: Partial<TripleFilter> | null,
-    inFilter?: Partial<TripleFilter> | null
+    outFilter?: Partial<PagedTripleFilter> | null,
+    inFilter?: Partial<PagedTripleFilter> | null
   ): void {
     if (
       !this._selectedNode$.value ||
@@ -748,7 +775,7 @@ export class GraphWalker {
       value: triple.objectLiteral || '',
       type: triple.literalType,
       language: triple.literalLanguage,
-      number: triple.literalNumber
+      number: triple.literalNumber,
     };
     return {
       id: this.buildLiteralId(triple.id),
@@ -768,22 +795,26 @@ export class GraphWalker {
    */
   public expandProperty(
     node: GraphNode,
-    outFilter?: Partial<LinkedNodeFilter> | null,
-    inFilter?: Partial<LinkedNodeFilter> | null,
-    litFilter?: Partial<LinkedLiteralFilter> | null
+    outFilter?: Partial<PagedLinkedNodeFilter> | null,
+    inFilter?: Partial<PagedLinkedNodeFilter> | null,
+    litFilter?: Partial<PagedLinkedLiteralFilter> | null
   ): void {
     // prepare filters
     const nid = this.getNodeNumericId(node.id);
     const data: WalkerPropData = node.data;
-    const outf: LinkedNodeFilter = Object.assign(
+    const outf: PagedLinkedNodeFilter = Object.assign(
       data.outFilter,
       outFilter || {},
       { isObject: true }
     );
-    const inf: LinkedNodeFilter = Object.assign(data.inFilter, inFilter || {}, {
-      isObject: false,
-    });
-    const litf: LinkedLiteralFilter = Object.assign(
+    const inf: PagedLinkedNodeFilter = Object.assign(
+      data.inFilter,
+      inFilter || {},
+      {
+        isObject: false,
+      }
+    );
+    const litf: PagedLinkedLiteralFilter = Object.assign(
       data.litFilter,
       litFilter || {},
       { subjectId: nid, predicateId: this.getPredicateNumericId(node.id) }
@@ -795,9 +826,17 @@ export class GraphWalker {
     const edges = [...this._edges$.value];
 
     forkJoin({
-      outs: this._graphService.getLinkedNodes(outf),
-      ins: this._graphService.getLinkedNodes(inf),
-      lits: this._graphService.getLinkedLiterals(litf),
+      outs: this._graphService.getLinkedNodes(
+        outf.pageNumber,
+        outf.pageSize,
+        outf
+      ),
+      ins: this._graphService.getLinkedNodes(inf.pageNumber, inf.pageSize, inf),
+      lits: this._graphService.getLinkedLiterals(
+        litf.pageNumber,
+        litf.pageSize,
+        litf
+      ),
     }).subscribe({
       next: (result) => {
         node.data.expanded = true;
@@ -900,9 +939,9 @@ export class GraphWalker {
    * @param litFilter The properties to update for the literal nodes filter.
    */
   public expandSelectedProperty(
-    outFilter?: Partial<LinkedNodeFilter> | null,
-    inFilter?: Partial<LinkedNodeFilter> | null,
-    litFilter?: Partial<LinkedLiteralFilter> | null
+    outFilter?: Partial<PagedLinkedNodeFilter> | null,
+    inFilter?: Partial<PagedLinkedNodeFilter> | null,
+    litFilter?: Partial<PagedLinkedLiteralFilter> | null
   ): void {
     if (
       !this._selectedNode$.value ||

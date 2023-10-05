@@ -21,6 +21,7 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { EnvServiceProvider, NgToolsModule } from '@myrmidon/ng-tools';
 import { NgMatToolsModule } from '@myrmidon/ng-mat-tools';
 import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
+import { PagedDataBrowsersModule } from '@myrmidon/paged-data-browsers';
 
 import { CadmusGraphUiExModule } from 'projects/myrmidon/cadmus-graph-ui-ex/src/public-api';
 
@@ -50,6 +51,7 @@ import { AppComponent } from './app.component';
     // Cadmus
     NgToolsModule,
     NgMatToolsModule,
+    PagedDataBrowsersModule,
     CadmusGraphUiExModule,
     CadmusRefsLookupModule,
   ],

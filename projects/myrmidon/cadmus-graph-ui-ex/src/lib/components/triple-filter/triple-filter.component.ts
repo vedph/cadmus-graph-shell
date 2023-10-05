@@ -5,11 +5,9 @@ import { forkJoin, from } from 'rxjs';
 
 import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
-import {
-  GraphService,
-  TripleFilter,
-  UriNode,
-} from '@myrmidon/cadmus-api';
+import { GraphService, UriNode } from '@myrmidon/cadmus-api';
+
+import { PagedTripleFilter } from '../../graph-walker';
 
 /**
  * Triples filter.
@@ -20,7 +18,7 @@ import {
   styleUrls: ['./triple-filter.component.css'],
 })
 export class TripleFilterComponent implements OnInit {
-  private _filter: TripleFilter;
+  private _filter: PagedTripleFilter;
 
   /**
    * True if this component is disabled.
@@ -45,10 +43,10 @@ export class TripleFilterComponent implements OnInit {
    * The filter.
    */
   @Input()
-  public get filter(): TripleFilter {
+  public get filter(): PagedTripleFilter {
     return this._filter;
   }
-  public set filter(value: TripleFilter) {
+  public set filter(value: PagedTripleFilter) {
     if (this._filter === value) {
       return;
     }
@@ -60,7 +58,7 @@ export class TripleFilterComponent implements OnInit {
    * Emitted when filter changes.
    */
   @Output()
-  public filterChange: EventEmitter<TripleFilter>;
+  public filterChange: EventEmitter<PagedTripleFilter>;
 
   public pageNumber: FormControl<number>;
   public pageSize: FormControl<number>;
@@ -92,7 +90,7 @@ export class TripleFilterComponent implements OnInit {
       pageSize: 10,
     };
     this.total = 0;
-    this.filterChange = new EventEmitter<TripleFilter>();
+    this.filterChange = new EventEmitter<PagedTripleFilter>();
     // form
     this.pageNumber = formBuilder.control(1, { nonNullable: true });
     this.pageSize = formBuilder.control(10, { nonNullable: true });
@@ -135,7 +133,7 @@ export class TripleFilterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private updateForm(filter: TripleFilter): void {
+  private updateForm(filter: PagedTripleFilter): void {
     this.pageNumber.setValue(filter.pageNumber);
     this.pageSize.setValue(filter.pageSize);
     this.litPattern.setValue(filter.literalPattern || null);
@@ -168,7 +166,7 @@ export class TripleFilterComponent implements OnInit {
     });
   }
 
-  private getFilter(): TripleFilter {
+  private getFilter(): PagedTripleFilter {
     return {
       pageNumber: +this.pageNumber.value,
       pageSize: +this.pageSize.value,

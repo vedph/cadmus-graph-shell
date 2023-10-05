@@ -5,12 +5,9 @@ import { take } from 'rxjs/operators';
 
 import { GraphNodeLookupService } from '@myrmidon/cadmus-graph-ui';
 
-import {
-  GraphService,
-  LinkedNodeFilter,
-  UriNode,
-  NodeSourceType,
-} from '@myrmidon/cadmus-api';
+import { GraphService, UriNode, NodeSourceType } from '@myrmidon/cadmus-api';
+
+import { PagedLinkedNodeFilter } from '../../graph-walker';
 
 /**
  * Linked non-literal node filter.
@@ -21,7 +18,7 @@ import {
   styleUrls: ['./linked-node-filter.component.css'],
 })
 export class LinkedNodeFilterComponent implements OnInit {
-  private _filter: LinkedNodeFilter;
+  private _filter: PagedLinkedNodeFilter;
 
   /**
    * True if this component is disabled.
@@ -46,10 +43,10 @@ export class LinkedNodeFilterComponent implements OnInit {
    * The filter.
    */
   @Input()
-  public get filter(): LinkedNodeFilter {
+  public get filter(): PagedLinkedNodeFilter {
     return this._filter;
   }
-  public set filter(value: LinkedNodeFilter) {
+  public set filter(value: PagedLinkedNodeFilter) {
     if (this._filter === value) {
       return;
     }
@@ -61,7 +58,7 @@ export class LinkedNodeFilterComponent implements OnInit {
    * Emitted when filter changes.
    */
   @Output()
-  public filterChange: EventEmitter<LinkedNodeFilter>;
+  public filterChange: EventEmitter<PagedLinkedNodeFilter>;
 
   public otherNodeId: number;
   public predicateId: number;
@@ -95,7 +92,7 @@ export class LinkedNodeFilterComponent implements OnInit {
       predicateId: 0,
     };
     this.total = 0;
-    this.filterChange = new EventEmitter<LinkedNodeFilter>();
+    this.filterChange = new EventEmitter<PagedLinkedNodeFilter>();
     // form
     this.pageNumber = formBuilder.control(1, { nonNullable: true });
     this.pageSize = formBuilder.control(10, { nonNullable: true });
@@ -124,7 +121,7 @@ export class LinkedNodeFilterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private updateForm(filter: LinkedNodeFilter): void {
+  private updateForm(filter: PagedLinkedNodeFilter): void {
     this.otherNodeId = filter.otherNodeId;
     this.predicateId = filter.predicateId;
     this.isObject = filter.isObject || false;
@@ -154,7 +151,7 @@ export class LinkedNodeFilterComponent implements OnInit {
     }
   }
 
-  private getFilter(): LinkedNodeFilter {
+  private getFilter(): PagedLinkedNodeFilter {
     return {
       pageNumber: +this.pageNumber.value,
       pageSize: +this.pageSize.value,
