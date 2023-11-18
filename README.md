@@ -44,6 +44,7 @@ To use this library in your Cadmus app:
 
 ## History
 
+- 2023-11-18: updated Angular.
 - 2023-11-09: ⚠️ upgraded to Angular 17.
 
 ### 1.1.0
